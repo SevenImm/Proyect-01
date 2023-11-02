@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<h2>GitHub Contributions Counter</h2>
+
+<label for="githubUsername">GitHub Username:</label>
+<input type="text" id="githubUsername" placeholder="Enter GitHub username">
+<button id="fetchButton">Fetch Contributions</button>
+
+<p id="result"></p>
+
+<script>
+  const fetchButton = document.getElementById('fetchButton');
+  const githubUsernameInput = document.getElementById('githubUsername');
+  const resultParagraph = document.getElementById('result');
+
+  fetchButton.addEventListener('click', () => {
+    const githubUsername = githubUsernameInput.value;
+    if (githubUsername) {
+      
+      const token = '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';
+      const url = `https://api.github.com/users/${githubUsername}/events/public`;
+
+      fetch(url, {
+        headers: {
+          Authorization: `token ${token}`,
+        },
+      })
+        .then(response => response.json())
+        .then(contributions => {
+          const numContributions = contributions.length;
+          resultParagraph.textContent = `Number of GitHub contributions for ${githubUsername}: ${numContributions}`;
+        })
+        .catch(error => {
+          resultParagraph.textContent = `Failed to retrieve contributions. Error: ${error}`;
+        });
+    } else {
+      resultParagraph.textContent = 'Please enter a valid GitHub username.';
+    }
+  });
+</script>
+
+</body>
+</html>
