@@ -11,32 +11,37 @@
 
 <h2>Github Contributions</h2>
 
+<label for="username">Enter GitHub username:</label>
+<input type="text" id="username" placeholder="GitHub username">
+<button id="fetchButton">Fetch Contributions</button>
+
 <div id="contributions"></div>
 
 <script>
-  const username = 'your_github_username';
-  const token = ''; 
+  const fetchButton = document.getElementById('fetchButton');
+  const usernameInput = document.getElementById('username');
+  const contributionsDiv = document.getElementById('contributions');
 
-  const url = `https://api.github.com/users/${username}/events/public`;
-
-  fetch(url, {
-    headers: {
-      Authorization: `token ${token}`,
-    },
-  })
-    .then(response => response.json())
-    .then(contributions => {
-      const contributionsDiv = document.getElementById('contributions');
-      contributions.forEach(event => {
-        const contributionElement = document.createElement('p');
-        contributionElement.textContent = `${event.type} at ${event.created_at}`;
-        contributionsDiv.appendChild(contributionElement);
-      });
-    })
-    .catch(error => {
-      const contributionsDiv = document.getElementById('contributions');
-      contributionsDiv.textContent = `Failed to retrieve contributions. Error: ${error}`;
-    });
+  fetchButton.addEventListener('click', () => {
+    const username = usernameInput.value;
+    if (username) {
+      const url = `https://api.github.com/users/${username}/events/public`;
+      
+      fetch(url)
+        .then(response => response.json())
+        .then(contributions => {
+          contributionsDiv.innerHTML = '';
+          contributions.forEach(event => {
+            const contributionElement = document.createElement('p');
+            contributionElement.textContent = `${event.type} at ${event.created_at}`;
+            contributionsDiv.appendChild(contributionElement);
+          });
+        })
+        .catch(error => {
+          contributionsDiv.textContent = `Failed to retrieve contributions. Error: ${error}`;
+        });
+    }
+  });
 </script>
 
 </body>
