@@ -1,12 +1,16 @@
 
 
 const fetchButton = document.getElementById('fetchButton');
-  const usernameInput = document.getElementById('username');
-  const contributionsDiv = document.getElementById('contributions');
+const usernameInput = document.getElementById('username');
+const contributionsDiv = document.getElementById('contributions');
+const cityChoice = document.getElementById('city')
 
-  fetchButton.addEventListener('click', () => {
+
+fetchButton.addEventListener('click', () => {
     const username = usernameInput.value;
+    const cityChoiceCity = cityChoice.value;
     console.log(username);
+    console.log(cityChoiceCity);
     if (username) {
       const url = `https://api.github.com/users/${username}/events/public`;
       
@@ -30,14 +34,12 @@ const fetchButton = document.getElementById('fetchButton');
 
 
 
+
+
+
+
+
 // test date and city in right now, but we'll have those as inputs from the html 
-const cityChoice = document.getElementById('city')
-
-fetchButton.addEventListener('click', () => {
-    const cityChoiceCity = cityChoice.value;
-    console.log(cityChoiceCity);
-});
-
 var date = '2023-5-05'
 var city = 'Austin'
 // This is a temporary api key on a free trial that ends november 16
