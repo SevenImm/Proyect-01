@@ -11,38 +11,18 @@
 
 <h2>Github Contributions</h2>
 
-<label for="username">Enter GitHub username:</label>
+<label for="username">Enter GitHub username: </label>
 <input type="text" id="username" placeholder="GitHub username">
 <button id="fetchButton">Fetch Contributions</button>
+<br>
+<!-- input for city  -->
+<label for="city">Enter the city you work in: </label>
+<input type="text" id="city" placeholder="City">
+<button id="cityBtn">Input City</button>
 
 <div id="contributions"></div>
+<script src="./assets/script.js"></script>
 
-<script>
-  const fetchButton = document.getElementById('fetchButton');
-  const usernameInput = document.getElementById('username');
-  const contributionsDiv = document.getElementById('contributions');
-
-  fetchButton.addEventListener('click', () => {
-    const username = usernameInput.value;
-    if (username) {
-      const url = `https://api.github.com/users/${username}/events/public`;
-      
-      fetch(url)
-        .then(response => response.json())
-        .then(contributions => {
-          contributionsDiv.innerHTML = '';
-          contributions.forEach(event => {
-            const contributionElement = document.createElement('p');
-            contributionElement.textContent = `${event.type} at ${event.created_at}`;
-            contributionsDiv.appendChild(contributionElement);
-          });
-        })
-        .catch(error => {
-          contributionsDiv.textContent = `Failed to retrieve contributions. Error: ${error}`;
-        });
-    }
-  });
-</script>
 
 </body>
 </html>

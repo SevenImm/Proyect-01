@@ -1,4 +1,42 @@
+
+
+const fetchButton = document.getElementById('fetchButton');
+  const usernameInput = document.getElementById('username');
+  const contributionsDiv = document.getElementById('contributions');
+
+  fetchButton.addEventListener('click', () => {
+    const username = usernameInput.value;
+    console.log(username);
+    if (username) {
+      const url = `https://api.github.com/users/${username}/events/public`;
+      
+      fetch(url)
+        .then(response => response.json())
+        .then(contributions => {
+          contributionsDiv.innerHTML = '';
+          contributions.forEach(event => {
+            const contributionElement = document.createElement('p');
+            contributionElement.textContent = `${event.type} at ${event.created_at}`;
+            contributionsDiv.appendChild(contributionElement);
+          });
+        })
+        .catch(error => {
+          contributionsDiv.textContent = `Failed to retrieve contributions. Error: ${error}`;
+        });
+    }
+  });
+
+
+
+
+
 // test date and city in right now, but we'll have those as inputs from the html 
+const cityChoice = document.getElementById('city')
+
+fetchButton.addEventListener('click', () => {
+    const cityChoiceCity = cityChoice.value;
+    console.log(cityChoiceCity);
+});
 
 var date = '2023-5-05'
 var city = 'Austin'
