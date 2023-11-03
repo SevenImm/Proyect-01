@@ -52,7 +52,12 @@ fetch(url)
     return response.json();
   })
   .then(data => {
+    // Extract the date portion from the datetime string
+    var datetime = data.forecast.forecastday[0].date;
+    var date = datetime.split('T')[0];
+
     // at the moment it returns the average temp of the day, but lots of things can be targetted
     var weather = (data.forecast.forecastday[0].day.avgtemp_f);
+    console.log("Date:", date);
     console.log(weather);
   });
