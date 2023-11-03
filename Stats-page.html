@@ -1,28 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-  }
-</style>
-</head>
-<body>
-
-<h2>Github Contributions</h2>
-
-<label for="username">Enter GitHub username: </label>
-<input type="text" id="username" placeholder="GitHub username">
-<button id="fetchButton">Fetch Contributions</button>
-<br>
-<!-- input for city  -->
-<label for="city">Enter the city you work in: </label>
-<input type="text" id="city" placeholder="City">
-<button id="cityBtn">Input City</button>
-
-<div id="contributions"></div>
-<script src="./assets/script.js"></script>
-
-
-</body>
-</html>
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+  </style>
+  </head>
+  <body>
+  
+  <h2>Github Contributions and City Weather</h2>
+  
+  <label for="username">Enter GitHub username:</label>
+  <input type="text" id="username" placeholder="GitHub username" autocomplete="on"><br><br>
+  
+  <label for="city">Enter city name:</label>
+  <input type="text" id="city" placeholder="City name" autocomplete="on"><br><br>
+  
+  <button id="fetchButton">Fetch Data</button>
+  
+  <div id="contributions"></div>
+  <div id="cityWeather"></div>
+  
+  <script src="./assets/script.js"></script>
+  
+  </body>
+  </html>
