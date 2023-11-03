@@ -6,7 +6,6 @@ const contributionsDiv = document.getElementById('contributions');
 fetchButton.addEventListener('click', () => {
   const username = usernameInput.value;
 
-
   if (username) {
     const githubUrl = `https://api.github.com/users/${username}/events/public`;
 
@@ -15,6 +14,7 @@ fetchButton.addEventListener('click', () => {
       .then(response => response.json())
       .then(contributions => {
         contributionsDiv.innerHTML = ''; // Clear previous contributions
+          console.log(contributions);
         contributions.forEach(event => {
           const contributionElement = document.createElement('p');
           contributionElement.textContent = `${event.type} at ${event.created_at}`;
