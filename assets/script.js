@@ -5,7 +5,7 @@ const usernameInput = document.getElementById('username');
 const contributionsDiv = document.getElementById('contributions');
 const cityChoice = document.getElementById('city')
 
-
+// takes the inputs from git username and city choice into variables
 fetchButton.addEventListener('click', () => {
     const username = usernameInput.value;
     const cityChoiceCity = cityChoice.value;
@@ -18,6 +18,7 @@ fetchButton.addEventListener('click', () => {
         .then(response => response.json())
         .then(contributions => {
           contributionsDiv.innerHTML = '';
+          console.log(contributions);
           contributions.forEach(event => {
             const contributionElement = document.createElement('p');
             contributionElement.textContent = `${event.type} at ${event.created_at}`;
