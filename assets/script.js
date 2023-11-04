@@ -1,9 +1,10 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const fetchButton = document.getElementById('fetchButton');
   const usernameInput = document.getElementById('username');
   const cityInput = document.getElementById('city');
-  const contributionsDiv = document.getElementById('contributions');
+  const resultsSection = document.getElementById('resultsSection'); // Updated the ID
   const API_KEY = 'f7b41a64bf0c4d4386720154230211';
+  const backButton = document.getElementById('backButton'); //Back to user input
 
   // Gets the saved info when you open the page
   const storedUsername = localStorage.getItem('username');
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
   fetchButton.addEventListener('click', () => {
     const username = usernameInput.value;
     const cityName = cityInput.value;
+    toggleSections();
 
     // Once you enter a username and city, it is saved into local storage
     localStorage.setItem('username', username);
@@ -45,8 +47,10 @@ document.addEventListener("DOMContentLoaded", function() {
           contributionsByDate[date] += 1;
         });
 
+        // Clear the previous results
+        resultsSection.innerHTML = ''; // Updated the element to resultsSection
+
         // Display last 5 unique days of contributions and weather data
-        contributionsDiv.innerHTML = '';
         const lastFiveUniqueDays = dates.slice(-5).reverse();
 
         const weatherPromises = lastFiveUniqueDays.map(date => {
@@ -65,24 +69,58 @@ document.addEventListener("DOMContentLoaded", function() {
             weatherResults.forEach(result => {
               const date = result.date;
               const contributionCount = contributionsByDate[date];
-              const contributionElement = document.createElement('p');
-              contributionElement.textContent = `Contributions on ${date}: ${contributionCount}`;
-              contributionsDiv.appendChild(contributionElement);
 
+              // Create a card for each result
+              const card = document.createElement('div');
+              card.className = 'bg-white p-4 rounded-md shadow-lg my-4';
+
+              const dateElement = document.createElement('p');
+              dateElement.className = 'text-lg font-semibold my-8';
+              dateElement.textContent = `Date: ${date}`;
+
+              const contributionElement = document.createElement('p');
+              contributionElement.className = 'text-sm';
+              contributionElement.textContent = `Contributions: ${contributionCount}`;
+
+              const weatherElement = document.createElement('p');
+              weatherElement.className = 'text-sm';
               if (result.weather) {
-                const weatherElement = document.createElement('p');
-                weatherElement.textContent = `Weather on ${date} in ${cityName}: ${result.weather}°F`;
-                contributionsDiv.appendChild(weatherElement);
+                weatherElement.textContent = `Weather: ${result.weather}°F`;
               } else {
-                const weatherErrorElement = document.createElement('p');
-                weatherErrorElement.textContent = `Failed to retrieve weather information for ${date}.`;
-                contributionsDiv.appendChild(weatherErrorElement);
+                weatherElement.textContent = `Weather: Failed to retrieve weather information`;
               }
+
+              // Append elements to the card
+              card.appendChild(dateElement);
+              card.appendChild(contributionElement);
+              card.appendChild(weatherElement);
+
+              // Append the card to the results section
+              resultsSection.appendChild(card);
             });
           });
       })
       .catch(error => {
-        contributionsDiv.textContent = `Failed to retrieve contributions. Error: ${error}`;
+        resultsSection.textContent = `Failed to retrieve contributions. Error: ${error}`;
       });
   });
+      // Back to stats page
+      backButton.addEventListener('click', () => {
+        toggleSections();
+      });  
+  function toggleSections() {
+    const userInputSection = document.getElementById('userInputSection');
+    const resultsSection = document.getElementById('resultsSection');
+
+    if (userInputSection.classList.contains('hidden')) {
+      userInputSection.classList.remove('hidden');
+      resultsSection.classList.add('hidden');
+      backButton.classList.add('hidden'); //Hide the back to input button
+    } else {
+      userInputSection.classList.add('hidden');
+      resultsSection.classList.remove('hidden');
+      backButton.classList.remove('hidden'); //show the back to input button
+    }
+  }
+
 });
