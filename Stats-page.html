@@ -2,34 +2,43 @@
 <html>
 
 <head>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-  </style>
+  <link rel="stylesheet" href="./assets/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-slate-800">
+<body class="min-h-screen text-white">
   <div class="md:flex md:items-center md:justify-between">
     <div class="min-w-0 flex-1">
       <h2
         class="text-2xl font-bold leading-7 text-white sm:truncate sm:text-3xl sm:tracking-tight bg-black p-3 text-center">
-        Github Contributions and City Weather</h2>
+        Github Contributions and City Weather
+      </h2>
     </div>
   </div>
-  <!-- Github component -->
-  <div id="userInputSection" class="container mx-auto p-4">
-    <label for="username" class="text-white">Enter GitHub username:</label><br>
-    <input type="text" id="username" placeholder="GitHub username" autocomplete="on"><br><br>
-    <!-- City component -->
-    <label for="city" class="text-white">Enter city name:</label><br>
-    <input type="text" id="city" placeholder="City name" autocomplete="on"><br><br>
-    <!-- Fetch data button -->
-    <button class="border-2 rounded-md p-1 bg-indigo-500 text-white" id="fetchButton">Fetch Data</button>
-  </div>
-  <div id="contributions"></div>
-  <div id="cityWeather"></div>
 
+  <!-- User Input Section -->
+  <div class="container mx-auto">
+    <div id="userInputSection" class="p-4 flex flex-col items-center justify-center h-screen">
+      <label for="username">Enter GitHub username:</label><br>
+      <input type="text" id="username" placeholder="GitHub username" autocomplete="on" class="text-black"><br>
+
+      <label for="city">Enter city name:</label><br>
+      <input type="text" id="city" placeholder="City name" autocomplete="on" class="text-black"><br>
+
+      <button class="border-2 rounded-md p-1 bg-indigo-500 text-white" id="fetchButton">Fetch Data</button>
+    </div>
+
+    <!-- Results Section -->
+    <div id="resultsSection" class="hidden p-4 text-black ">
+      <div class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-1 xl:grid-cols-1 gap-4">
+        <!-- Cards for results will be generated dynamically using JavaScript -->
+      </div>
+    </div>
+    <div class="flex justify-center">
+      <button class="border-2 rounded-md p-1 bg-indigo-500 text-white mt-4 justify-center" id="backButton">Back to
+        Input</button>
+    </div>
+  </div>
   <script src="./assets/script.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 </body>
