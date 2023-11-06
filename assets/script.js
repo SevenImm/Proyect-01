@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
               // Create a card for each result
               const card = document.createElement('div');
-              card.className = 'bg-white p-4 rounded-md shadow-lg my-4';
+              card.className = 'bg-white p-4 rounded-md shadow-lg my-4 hover:bg-sky-700 cursor-pointer hover:p-8 hover:text-white hover:transition-all';
 
               const dateElement = document.createElement('p');
               dateElement.className = 'text-lg font-semibold my-8';
